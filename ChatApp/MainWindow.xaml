@@ -1,0 +1,16 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatApp"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="ChatApp.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="367.626" Width="352.938">
+    <Grid>
+        <telerik:Label Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="38,53,0,0" VerticalAlignment="Top"/>
+        <telerik:RadButton Name="btnLogin" Content="Log In" HorizontalAlignment="Left" Height="40" Margin="38,147,0,0" VerticalAlignment="Top" Width="110" Click="btnLogin_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="38,90,0,0" TextWrapping="Wrap" Name="txtUsername" VerticalAlignment="Top" Width="158"/>
+        <telerik:RadGridView HorizontalAlignment="Left" Margin="177,55,0,0" VerticalAlignment="Top" Height="149" Width="144"/>
+    </Grid>
+</Window>
