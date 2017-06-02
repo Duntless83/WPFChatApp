@@ -1,15 +1,18 @@
-﻿using PubnubApi;
+﻿using System;
+using ChatApp.Events;
+using ChatApp.Interface;
+using PubnubApi;
 
 namespace ChatApp
 {
-    public delegate void UiEventHandler(object source, MyEventArgs e);
-    public class PubnubWrapper
+    public class PubnubWrapper : SubscribeCallback, IPubnubWrapper
     {
         private Pubnub _pubnub;
 
-        public event UiEventHandler OnPresence;
-        public event UiEventHandler OnMessage;
-        public event UiEventHandler OnStatus;
+        public event EventHandler<StatusEventArgs> StatusReceived;
+        public event EventHandler<PresenceEventArgs> PresenceReceived;
+        public event EventHandler<MessageEventArgs> MessageReceived;
+
         public void Initialise(string username)
         {
             PNConfiguration config = new PNConfiguration();
@@ -20,12 +23,7 @@ namespace ChatApp
             config.PubnubLog = new Logger();         
             _pubnub = new Pubnub(config);
 
-            var listener = new PubnubListener(_pubnub);
-            listener.OnPresence += Listener_OnPresence; ;
-            listener.OnStatus += Listener_OnStatus;
-            listener.OnMessage += Listener_OnMessage;
-
-            _pubnub.AddListener(listener);
+            _pubnub.AddListener(this);
 
             _pubnub.Subscribe<string>()
                 .Channels(new string[] { "my_channel" })
@@ -33,19 +31,56 @@ namespace ChatApp
                 .Execute();
         }
 
-        private void Listener_OnMessage(object source, MyEventArgs e)
+        public override void Message<T>(Pubnub pubnub, PNMessageResult<T> message)
         {
-            OnMessage(this, new MyEventArgs(e.GetInfo()));
+            //the ? is shorthand to check if not null
+            MessageReceived?.Invoke(this, new MessageEventArgs
+            {
+                Channel = message.Channel,
+                Message = message.Message.ToString(),
+                Subscription = message.Subscription,
+                TimeToken = message.Timetoken,
+                userMetadata = message.UserMetadata
+            });
         }
 
-        private void Listener_OnPresence(object source, MyEventArgs e)
+        public override void Presence(Pubnub pubnub, PNPresenceEventResult presence)
         {
-            OnPresence(this, new MyEventArgs(e.GetInfo()));
+            //the ? is shorthand to check if not null
+            PresenceReceived?.Invoke(this, new PresenceEventArgs
+            {
+                Channel = presence.Channel,
+                Event = presence.Event,
+                Join = presence.Join,
+                Leave = presence.Leave,
+                Occupancy = presence.Occupancy,
+                State = presence.State,
+                Subscription = presence.Subscription,
+                Timeout = presence.Timeout,
+                Timestamp = presence.Timestamp,
+                TimeToken = presence.Timetoken,
+                userMetadata = presence.UserMetadata,
+                Uuid = presence.Uuid
+            });
         }
-
-        private void Listener_OnStatus(object source, MyEventArgs e)
+        public override void Status(Pubnub pubnub, PNStatus status)
         {
-            OnStatus(this, new MyEventArgs(e.GetInfo()));
+            //the ? is shorthand to check if not null
+            StatusReceived?.Invoke(this, new StatusEventArgs
+            {
+                Uuid = status.Uuid,
+                StatusCode = status.StatusCode,
+                AffectedChannelGroups = status.AffectedChannelGroups,
+                AffectedChannels = status.AffectedChannels,
+                AuthKey = status.AuthKey,
+                Category = status.Category,
+                ClientRequest = status.ClientRequest,
+                Error = status.Error,
+                ErrorData = status.ErrorData,
+                Operation = status.Operation,
+                Origin = status.Origin,
+                TlsEnabled = status.TlsEnabled
+            });
         }
 
         public void PublishMessage(string text)

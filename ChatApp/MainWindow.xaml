@@ -11,6 +11,6 @@
         <telerik:Label Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="38,53,0,0" VerticalAlignment="Top"/>
         <telerik:RadButton Name="btnLogin" Content="Log In" HorizontalAlignment="Left" Height="40" Margin="38,147,0,0" VerticalAlignment="Top" Width="110" Click="btnLogin_Click"/>
         <TextBox HorizontalAlignment="Left" Height="34" Margin="38,90,0,0" TextWrapping="Wrap" Name="txtUsername" VerticalAlignment="Top" Width="158"/>
-        <telerik:RadGridView HorizontalAlignment="Left" Margin="177,55,0,0" VerticalAlignment="Top" Height="149" Width="144"/>
+        <telerik:RadGridView HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="320" Width="328" Name="grdChat" Visibility="Hidden"/>
     </Grid>
 </Window>
