@@ -1,31 +1,31 @@
-﻿using ChatApp.Interface;
+﻿using System;
+using ChatApp.Events;
+using ChatApp.Interface;
 
 namespace ChatApp
 {
     class ChatController : IChatController
     {
+        public event EventHandler<SuccessfulLogin> LogInEvent;
         private readonly IPubnubWrapper _wrapper;
 
-        private bool _successfulLogin;
         public ChatController(IPubnubWrapper wrapper)
         {
             _wrapper = wrapper;
-
-            _successfulLogin = false;
 
             _wrapper.StatusReceived += _wrapper_StatusReceived;
             _wrapper.PresenceReceived += _wrapper_PresenceReceived;
             _wrapper.MessageReceived += _wrapper_MessageReceived;
         }
 
-        public bool Login(string username)
+        public void Login(string username)
         {
             _wrapper.Initialise(username);
+        }
 
-            while(!_successfulLogin)
-            { }
-
-            return _successfulLogin;
+        public void SendMessage(string txt)
+        {
+            _wrapper.PublishMessage(txt);
         }
 
         private void _wrapper_MessageReceived(object sender, Events.MessageEventArgs e)
@@ -42,7 +42,12 @@ namespace ChatApp
         private void _wrapper_StatusReceived(object sender, Events.StatusEventArgs e)
         {
             if (e.StatusCode == 200)
-                _successfulLogin = true;
+            {
+                LogInEvent?.Invoke(this, new SuccessfulLogin
+                {
+                    LoggedIn = true
+                });
+            }
         }
     }
 }

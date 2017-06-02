@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ChatApp.Events;
+using System;
 
 namespace ChatApp.Interface
 {
     public interface IChatController
     {
-        bool Login(string username);
+        void Login(string username);
+        event EventHandler<SuccessfulLogin> LogInEvent;
+        void SendMessage(string txt);
     }
 }

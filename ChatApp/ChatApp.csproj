@@ -87,11 +87,13 @@
     <Compile Include="Events\MessageEventArgs.cs" />
     <Compile Include="Events\PresenceEventArgs.cs" />
     <Compile Include="Events\StatusEventArgs.cs" />
+    <Compile Include="Events\SuccessfulLogin.cs" />
     <Compile Include="Interface\IChatController.cs" />
     <Compile Include="Interface\IPubnubWrapper.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="PubnubResult.cs" />
     <Compile Include="PubnubWrapper.cs" />
+    <Compile Include="UIUtility.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

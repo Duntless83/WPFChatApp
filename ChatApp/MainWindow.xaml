@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:ChatApp"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="ChatApp.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="367.626" Width="352.938">
+        Title="MainWindow" Height="399.363" Width="352.938">
     <Grid>
         <telerik:Label Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="38,53,0,0" VerticalAlignment="Top"/>
         <telerik:RadButton Name="btnLogin" Content="Log In" HorizontalAlignment="Left" Height="40" Margin="38,147,0,0" VerticalAlignment="Top" Width="110" Click="btnLogin_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="34" Margin="38,90,0,0" TextWrapping="Wrap" Name="txtUsername" VerticalAlignment="Top" Width="158"/>
-        <telerik:RadGridView HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="320" Width="328" Name="grdChat" Visibility="Hidden"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="38,90,0,0" Name="txtUsername" VerticalAlignment="Top" Width="158"/>
+        <telerik:RadGridView HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="291" Width="328" Name="grdChat" ShowGroupPanel="False" ShowColumnHeaders="False" Visibility="Hidden" />
+        <telerik:RadButton Content="Send" Name="btnSend" HorizontalAlignment="Left" Height="34" Margin="276,320,0,0" VerticalAlignment="Top" Width="62" Visibility="Hidden" Click="btnSend_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="10,320,0,0" Name="txtMessage" VerticalAlignment="Top" Width="261" Visibility="Hidden"/>
     </Grid>
 </Window>
