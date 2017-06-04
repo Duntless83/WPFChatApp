@@ -1,8 +1,11 @@
 ﻿using ChatApp.DependencyInjection;
+using ChatApp.Events;
 using ChatApp.Interface;
 using StructureMap;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace ChatApp
 {
@@ -18,11 +21,25 @@ namespace ChatApp
             var container = new Container(registry);
             _controller = container.GetInstance<IChatController>();
 
-
             _controller.LogInEvent += _controller_LogInEvent;
+            _controller.MessageReceived += _controller_MessageReceived;
+            _controller.PresenceReceived += _controller_PresenceReceived;
         }
 
-        private void _controller_LogInEvent(object sender, Events.SuccessfulLogin e)
+        private void _controller_PresenceReceived(object sender, PresenceEventArgs e)
+        {
+            ListBoxItem itm = new ListBoxItem();
+            itm.Content = e.Uuid;
+            lstOnlineUsers.HandleInvokeRequired(tb => tb.Visibility = Visibility.Visible);
+            lstOnlineUsers.HandleInvokeRequired(tb => tb.Items.Add(itm));
+        }
+
+        private void _controller_MessageReceived(object sender, MessageEventArgs e)
+        {
+            grdChat.HandleInvokeRequired(tb => tb.Items.Add(new MessageEventArgs { Message = e.Message }));
+        }
+
+        private void _controller_LogInEvent(object sender, SuccessfulLogin e)
         {
             if (e.LoggedIn)
                 MakeChatGridVisible();
@@ -44,6 +61,7 @@ namespace ChatApp
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             _controller.SendMessage(txtMessage.Text);
+            txtMessage.Text = "";
         }
     }
 }

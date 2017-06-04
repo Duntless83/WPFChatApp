@@ -7,6 +7,9 @@ namespace ChatApp
     class ChatController : IChatController
     {
         public event EventHandler<SuccessfulLogin> LogInEvent;
+        public event EventHandler<MessageEventArgs> MessageReceived;
+        public event EventHandler<PresenceEventArgs> PresenceReceived;
+
         private readonly IPubnubWrapper _wrapper;
 
         public ChatController(IPubnubWrapper wrapper)
@@ -30,13 +33,20 @@ namespace ChatApp
 
         private void _wrapper_MessageReceived(object sender, Events.MessageEventArgs e)
         {
-
+            MessageReceived?.Invoke(this, new MessageEventArgs
+            {
+                Channel = e.Channel,
+                Message = e.Message,
+                Subscription = e.Subscription,
+                TimeToken = e.TimeToken,
+                userMetadata = e.userMetadata
+            });
         }
 
 
         private void _wrapper_PresenceReceived(object sender, Events.PresenceEventArgs e)
         {
-            
+            PresenceReceived?.Invoke(this, e);
         }
 
         private void _wrapper_StatusReceived(object sender, Events.StatusEventArgs e)
