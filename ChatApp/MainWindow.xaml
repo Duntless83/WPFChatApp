@@ -22,5 +22,6 @@
         </DataGrid>
         <ListBox HorizontalAlignment="Left" Height="301" Margin="431,53,0,0" VerticalAlignment="Top" Width="131" Name="lstOnlineUsers"  Visibility="Hidden"/>
         <Label Content="Users Online" HorizontalAlignment="Left" Margin="431,22,0,0" VerticalAlignment="Top"  Visibility="Hidden" Name="lblUsersOnline"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="299,5,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

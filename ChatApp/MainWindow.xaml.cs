@@ -67,5 +67,10 @@ namespace ChatApp
         {
             _controller.UnsubscribeFromChannel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _controller.CheckHereNow("my_channel");
+        }
     }
 }

@@ -96,5 +96,13 @@ namespace ChatApp
                 .Message(text)
                 .Async(new PubnubResult());
         }
+
+        public void CheckHereNow(string channel)
+        {
+            _pubnub.HereNow()
+                .Channels(new string[] { channel })
+                .IncludeUUIDs(true)
+                .Async(new HereNowResult());
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace ChatApp.Interface
     {
         void Initialise(string username);
         void Unsubscribe();
+        void CheckHereNow(string channel);
         void PublishMessage(string text);
         event EventHandler<StatusEventArgs> StatusReceived;
         event EventHandler<PresenceEventArgs> PresenceReceived;

@@ -11,5 +11,6 @@ namespace ChatApp.Interface
         event EventHandler<MessageEventArgs> MessageReceived;
         event EventHandler<PresenceEventArgs> PresenceReceived;
         void SendMessage(string txt);
+        void CheckHereNow(string channel);
     }
 }

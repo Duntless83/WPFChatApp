@@ -6,7 +6,7 @@ namespace ChatApp
 {
     class ChatController : IChatController
     {
-        public event EventHandler<SuccessfulLogin> LogInEvent;
+        public event EventHandler<SuccessfulLogin> LogInEvent; 
         public event EventHandler<MessageEventArgs> MessageReceived;
         public event EventHandler<PresenceEventArgs> PresenceReceived;
 
@@ -63,6 +63,11 @@ namespace ChatApp
                     LoggedIn = true
                 });
             }
+        }
+
+        public void CheckHereNow(string channel)
+        {
+            _wrapper.CheckHereNow(channel);
         }
     }
 }
