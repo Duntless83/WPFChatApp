@@ -130,6 +130,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Dependencies\crypto.dll" />
+    <Content Include="Dependencies\Newtonsoft.Json.dll" />
+    <Content Include="Dependencies\Pubnub.dll" />
+    <Content Include="Dependencies\StructureMap.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
