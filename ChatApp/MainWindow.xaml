@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChatApp"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls" x:Class="ChatApp.MainWindow"
         mc:Ignorable="d"
-        Title="Simple Chat App" Height="399.363" Width="590.511">
+        Title="Simple Chat App" Height="399.363" Width="590.511" Closing="Window_Closing">
     <Grid>
         <Label x:Name="lblUsername" Content="Username:" HorizontalAlignment="Left" Margin="38,53,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnLogin" Content="Log In" HorizontalAlignment="Left" Height="40" Margin="38,147,0,0" VerticalAlignment="Top" Width="110" Click="btnLogin_Click"/>
@@ -20,6 +20,7 @@
                 <DataGridTextColumn Binding="{Binding Path=Time}" Header="Time" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox HorizontalAlignment="Left" Height="344" Margin="431,10,0,0" VerticalAlignment="Top" Width="131" Visibility="Hidden" Name="lstOnlineUsers"/>
+        <ListBox HorizontalAlignment="Left" Height="301" Margin="431,53,0,0" VerticalAlignment="Top" Width="131" Name="lstOnlineUsers"  Visibility="Hidden"/>
+        <Label Content="Users Online" HorizontalAlignment="Left" Margin="431,22,0,0" VerticalAlignment="Top"  Visibility="Hidden" Name="lblUsersOnline"/>
     </Grid>
 </Window>

@@ -6,6 +6,7 @@ namespace ChatApp.Interface
     public interface IPubnubWrapper
     {
         void Initialise(string username);
+        void Unsubscribe();
         void PublishMessage(string text);
         event EventHandler<StatusEventArgs> StatusReceived;
         event EventHandler<PresenceEventArgs> PresenceReceived;

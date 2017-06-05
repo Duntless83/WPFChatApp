@@ -31,6 +31,12 @@ namespace ChatApp
                 .Execute();
         }
 
+        public void Unsubscribe()
+        {
+            if(_pubnub != null)
+                _pubnub.Unsubscribe<string>().Channels(new string[] { "my_channel" }).Execute();
+        }
+
         public override void Message<T>(Pubnub pubnub, PNMessageResult<T> message)
         {
             //the ? is shorthand to check if not null

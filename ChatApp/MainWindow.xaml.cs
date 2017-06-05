@@ -28,10 +28,9 @@ namespace ChatApp
 
         private void _controller_PresenceReceived(object sender, PresenceEventArgs e)
         {
-            ListBoxItem itm = new ListBoxItem();
-            itm.Content = e.Uuid;
             lstOnlineUsers.HandleInvokeRequired(tb => tb.Visibility = Visibility.Visible);
-            lstOnlineUsers.HandleInvokeRequired(tb => tb.Items.Add(itm));
+            lstOnlineUsers.HandleInvokeRequired(tb => tb.Items.Add(new ListBoxItem { Content= e.Uuid }));
+            lblUsersOnline.HandleInvokeRequired(tb => tb.Visibility = Visibility.Visible);
         }
 
         private void _controller_MessageReceived(object sender, MessageEventArgs e)
@@ -62,6 +61,11 @@ namespace ChatApp
         {
             _controller.SendMessage(txtMessage.Text);
             txtMessage.Text = "";
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _controller.UnsubscribeFromChannel();
         }
     }
 }

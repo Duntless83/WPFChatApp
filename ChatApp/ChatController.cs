@@ -26,6 +26,11 @@ namespace ChatApp
             _wrapper.Initialise(username);
         }
 
+        public void UnsubscribeFromChannel()
+        {
+            _wrapper.Unsubscribe();
+        }
+
         public void SendMessage(string txt)
         {
             _wrapper.PublishMessage(txt);
